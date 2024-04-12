@@ -8,7 +8,7 @@ import {
 } from '../controllers/cat-controller.js';
 
 import multer from 'multer';
-import {createThumbnail} from '../../middlewares.js';
+import {authenticateToken, createThumbnail} from '../../middlewares.js';
 
 const catRouter = express.Router();
 
@@ -36,7 +36,7 @@ const upload = multer({destination: 'uploads/', storage});
 
 catRouter.route('/')
   .get(getCat)
-  .post(upload.single('file'), createThumbnail, postCat);
+  .post(authenticateToken, upload.single('file'), createThumbnail, postCat);
 
 catRouter.route('/:id')
   .get(getCatById)

@@ -13,16 +13,4 @@ app.get('/', (req, res) => {
     res.send('Welcome to my REST API!');
 });
 
-app.get('/api/v1/cats', (req, res) => {
-    const cat = {
-        cat_id: 1,
-        name: 'Viski',
-        birthdate: '2001-02-01',
-        weight: 12,
-        owner: 3,
-        image: 'https://loremflickr.com/320/240/cat'
-    };
-    res.json(cat)
-});
-
 export default app;

@@ -1,11 +1,12 @@
 import {addUser, findUserById, listAllUsers} from '../models/user-model.js';
+import bcrypt from 'bcrypt';
 
-const getUsers = (req, res) => {
-  res.json(listAllUsers());
+const getUsers = async (req, res) => {
+  res.json(await listAllUsers());
 };
 
-const getUserById = (req, res) => {
-  const user = findUserById(req.params.id);
+const getUserById = async (req, res) => {
+  const user = await findUserById(req.params.id);
   if (user) {
     res.json(user);
   } else {
@@ -13,11 +14,12 @@ const getUserById = (req, res) => {
   }
 };
 
-const postUser = (req, res) => {
-  const result = addUser(req.body);
+const postUser = async (req, res) => {
+  console.log(req.body);
+  req.body.password = bcrypt.hashSync(req.body.password, 10);
+  const result = await addUser(req.body);
   if (result.user_id) {
-    res.sendStatus(201);
-    res.json({message: 'User added', result});
+    res.status(201).json({message: 'User added', result});
   } else {
     res.sendStatus(400);
   }

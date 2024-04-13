@@ -18,11 +18,8 @@ const postUser = async (req, res) => {
   console.log(req.body);
   req.body.password = bcrypt.hashSync(req.body.password, 10);
   const result = await addUser(req.body);
-  if (result.user_id) {
-    res.status(201).json({message: 'User added', result});
-  } else {
-    res.sendStatus(400);
-  }
+  if (result) res.status(201).json({message: 'User added', result});
+  else res.sendStatus(400);
 };
 
 export {postUser, getUserById, getUsers};

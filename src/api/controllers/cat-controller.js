@@ -29,7 +29,7 @@ const postCat = async (req, res) => {
 };
 
 const putCat = async (req, res) => {
-  console.log(req.body);
+  //console.log(req.body);
   const result = await modifyCat(req.body , req.params.id, res.locals.user)
   if (result){
     res.status(200).json({message: "cat modified!"});

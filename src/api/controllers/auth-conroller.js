@@ -4,7 +4,7 @@ import {getUserByUsername} from '../models/user-model.js';
 import 'dotenv/config';
 
 const postLogin = async (req, res) => {
-  console.log('postLogin', req.body);
+  //console.log('postLogin', req.body);
   const user = await getUserByUsername(req.body.username);
   if (!user) {
     res.sendStatus(401);
@@ -31,8 +31,8 @@ const postLogin = async (req, res) => {
 };
 
 const getMe = async (req, res) => {
-  console.log('getMe', res.locals.user);
-  if ( res.locals.user) {
+  //console.log('getMe', res.locals.user);
+  if (res.locals.user) {
     res.json({message: 'token ok', user:  res.locals.user});
   } else {
     res.sendStatus(401);

@@ -1,5 +1,3 @@
-// Note: db functions are async and must be called with await from the controller
-// How to handle errors in controller?
 import promisePool from '../../utils/database.js';
 
 const listAllCats = async () => {
@@ -9,7 +7,7 @@ const listAllCats = async () => {
 
 const findCatById = async (id) => {
   const [rows] = await promisePool.execute('SELECT * FROM wsk_cats WHERE cats_id = ?', [id]);
-  console.log('rows', rows);
+  //console.log('rows', rows);
   if (rows.length === 0) {
     return false;
   }
@@ -37,7 +35,7 @@ const addCat = async (cat, file) => {
 const modifyCat = async (cat, id) => {
   const sql = promisePool.format(`UPDATE wsk_cats SET ? WHERE cat_id = ?`, [cat, id]);
   const rows = await promisePool.execute(sql);
-  console.log('rows', rows);
+  //console.log('rows', rows);
   if (rows[0].affectedRows === 0) {
     return false;
   }
@@ -46,7 +44,7 @@ const modifyCat = async (cat, id) => {
 
 const removeCat = async (id) => {
   const [rows] = await promisePool.execute('DELETE FROM wsk_cats WHERE cat_id = ?', [id]);
-  console.log('rows', rows);
+  //console.log('rows', rows);
   if (rows.affectedRows === 0) {
     return false;
   }

@@ -14,12 +14,17 @@ const getUserById = async (req, res) => {
   }
 };
 
-const postUser = async (req, res) => {
+const postUser = async (req, res, next) => {
   console.log(req.body);
   req.body.password = bcrypt.hashSync(req.body.password, 10);
   const result = await addUser(req.body);
-  if (result) res.status(201).json({message: 'User added', result});
-  else res.sendStatus(400);
+  if (!result) {
+    const error = new Error("Invalid or missing fields");
+    error.status = 400;
+    next(error);
+  } else {
+    res.status(201).json({ message: "New user added"});
+  }
 };
 
 export {postUser, getUserById, getUsers};

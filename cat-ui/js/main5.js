@@ -144,7 +144,7 @@ close.addEventListener('click', (evt) => {
 // AJAX call
 
 const getCat = async () => {
-  console.log('getCat token ', sessionStorage.getItem('token'));
+  //console.log('getCat token ', sessionStorage.getItem('token'));
   try {
     const options = {
       headers: {

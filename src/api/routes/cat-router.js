@@ -40,7 +40,7 @@ catRouter.route('/')
 
 catRouter.route('/:id')
   .get(getCatById)
-  .put(putCat)
-  .delete(deleteCat);
+  .put(authenticateToken, putCat)
+  .delete(authenticateToken, deleteCat);
 
 export default catRouter;

@@ -4,7 +4,6 @@ import promisePool from '../../utils/database.js';
 
 const listAllCats = async () => {
   const [rows] = await promisePool.query('SELECT * FROM wsk_cats');
-  console.log('rows', rows);
   return rows;
 };
 
@@ -29,7 +28,6 @@ const addCat = async (cat, file) => {
     }
   })
   const rows = await promisePool.execute(sql, params);
-  console.log('rows', rows);
   if (rows[0].affectedRows === 0) {
     return false;
   }
